@@ -1,4 +1,4 @@
-# Passphrase(.py)
+# pw(.py)
 
 Generate secure random passphrases
 
