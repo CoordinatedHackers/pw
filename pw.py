@@ -248,18 +248,11 @@ words = [
 "your","yourself","youth","zero","zoo"
 ]
 
-from os import urandom
-from itertools import islice
-from math import ceil, log
+from random import SystemRandom
+random = SystemRandom()
 
-bytes_needed = ceil(log(len(words), 2) / 8)
-
-def random_words():
-	while True:
-		selection = int.from_bytes(urandom(bytes_needed), 'little');
-		if selection < len(words):
-			yield words[selection]
-
+def random_words(n):
+	return random.sample(words, n)
 
 if __name__ == "__main__":
 	import argparse
@@ -267,6 +260,7 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Generate a secure random passphrase.")
 	parser.add_argument('-c', type=int, metavar="<passphrases>", help="How many passphrases to generate", default=1)
 	parser.add_argument('-n', type=int, metavar="<words>", help="Number of words per passphrase", default=4)
+
 	args = parser.parse_args()
 	for c in range(args.c):
-		print(' '.join(islice(random_words(), args.n)))
+		print(' '.join(random_words(args.n)))
