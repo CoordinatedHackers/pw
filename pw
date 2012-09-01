@@ -250,10 +250,13 @@ words = [
 
 from os import urandom
 from itertools import islice
+from math import ceil, log
+
+bytes_needed = ceil(log(len(words), 2) / 8)
 
 def random_words():
 	while True:
-		yield words[int.from_bytes(urandom(2), 'little') % len(words)]
+		yield words[int.from_bytes(urandom(bytes_needed), 'little') % len(words)]
 
 
 if __name__ == "__main__":
