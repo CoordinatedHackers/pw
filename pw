@@ -256,7 +256,9 @@ bytes_needed = ceil(log(len(words), 2) / 8)
 
 def random_words():
 	while True:
-		yield words[int.from_bytes(urandom(bytes_needed), 'little') % len(words)]
+		selection = int.from_bytes(urandom(bytes_needed), 'little');
+		if selection < len(words):
+			yield words[selection]
 
 
 if __name__ == "__main__":
