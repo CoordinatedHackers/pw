@@ -258,10 +258,10 @@ if __name__ == "__main__":
 	import argparse
 
 	parser = argparse.ArgumentParser(description="Generate a secure random passphrase.")
-	parser.add_argument('-c', type=int, metavar="<passphrases>", help="How many passphrases to generate", default=1)
-	parser.add_argument('-n', type=int, metavar="<words>", help="Number of words per passphrase", default=4)
-	parser.add_argument('-s', help="Don’t put spaces between words", action='store_const', const=True)
+	parser.add_argument('-n', type=int, metavar="<passphrases>", dest="count", help="How many passphrases to generate", default=1)
+	parser.add_argument('-l', type=int, metavar="<words>", dest="length", help="Number of words per passphrase", default=4)
+	parser.add_argument('-s', dest="no_spaces", help="Don’t put spaces between words", action='store_const', const=True)
 
 	args = parser.parse_args()
-	for c in range(args.c):
-		print(('' if args.s else ' ').join(random_words(args.n)))
+	for _ in range(args.count):
+		print(('' if args.no_spaces else ' ').join(random_words(args.length)))
