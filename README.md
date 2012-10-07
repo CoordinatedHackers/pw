@@ -1,4 +1,4 @@
-# pw(.py)
+# pw.{py,html,crx}
 
 Generate secure random passphrases
 
